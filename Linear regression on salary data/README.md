@@ -91,5 +91,6 @@ using this equation:
 ![Loss Curve](./loss_curve.png)
 
 **-----------------------------------------**
+
 ![Gradient Descent Animation](gd\_animation.png)
 
