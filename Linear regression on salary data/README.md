@@ -62,7 +62,7 @@ m:the slope
 
 b:the intercept (Basically means the outcome in the first state, when x=0)
 
-!\[Regression Plot](regression\_plot.PNG)
+!\[Regression Plot](regression\_plot.png)
 
 
 
@@ -76,7 +76,7 @@ and true values
 
 using this equation:
 
-!\[MSE Equation](mse.JPG)
+!\[MSE Equation](mse.jpg)
 
 
 
@@ -84,12 +84,12 @@ using this equation:
 
 **Plots**
 
-!\[Salary vs Experience](salary\_vs\_experience.PNG)
+!\[Salary vs Experience](salary\_vs\_experience.png)
 
 **-----------------------------------------**
 
-!\[Loss Curve](loss\_curve.PNG)
+!\[Loss Curve](loss\_curve.png)
 
 **-----------------------------------------**
-!\[Gradient Descent Animation](gd\_animation.PNG)
+!\[Gradient Descent Animation](gd\_animation.png)
 
