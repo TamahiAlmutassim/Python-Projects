@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
-def compute_error_for_line_given_points(b,m,coordinates):
+def mean_squared_error(b,m,coordinates):
 
 	x = coordinates[:, 0] #Get all the x points
 	y = coordinates[:, 1] #Get all the y points 
@@ -11,7 +11,7 @@ def compute_error_for_line_given_points(b,m,coordinates):
     #getting the average 
 	return float(np.mean(error ** 2))
 
-def gradient_descent_runner(points,starting_b,starting_m,learning_rate,num_iteration):
+def gradient_descent_optimization(points,starting_b,starting_m,learning_rate,num_iteration):
 	#star ting valuer for b,m
 	b=starting_b
 	m=starting_m
@@ -22,7 +22,7 @@ def gradient_descent_runner(points,starting_b,starting_m,learning_rate,num_itera
 		#updating b and m with more accurate b , m 
 		b, m= step_gradiant(b, m, points, learning_rate)
 		# compute error AFTER update
-		error = compute_error_for_line_given_points(b, m, points)
+		error = mean_squared_error(b, m, points)
 		MSE_per_epoch.append(error)
 		line_history.append((b, m))
 	return b, m, MSE_per_epoch, line_history
@@ -48,7 +48,7 @@ def step_gradiant(b_current,m_current,points,LearnignRate):
 
 def run():
 	#first we get our data 
-	coordinates = np.genfromtxt('Salary_Data.csv', delimiter=',', skip_header=1)
+	coordinates = np.genfromtxt('dataset/Salary_Data.csv', delimiter=',', skip_header=1)
 
 	#step 2: Define hyperparameters of the learning process
 	learning_rate=0.01               # How fast our mode converge 
@@ -61,13 +61,24 @@ def run():
 	print("Starting gradient descent at b = {0}, m = {1}, error = {2}".format(
     initial_b,
     initial_m,
-	compute_error_for_line_given_points(initial_b, initial_m, coordinates)))
-	b, m, MSE_per_epoch, line_history= gradient_descent_runner(coordinates,initial_b,initial_m,learning_rate,epochs)
+	mean_squared_error(initial_b, initial_m, coordinates)))
+	b, m, MSE_per_epoch, line_history=gradient_descent_optimization(coordinates,initial_b,initial_m,learning_rate,epochs)
 	print("Ending point at b = {1}, m = {2}, error = {3}".format(
     epochs,
     b,
     m, 
-	compute_error_for_line_given_points(b, m, coordinates)))
+	mean_squared_error(b, m, coordinates)))
+
+	#To make sure our work is correct we are going to compare the results using scikit-learn
+	x = coordinates[:, 0].reshape(-1, 1)
+	y = coordinates[:, 1]
+
+	model = LinearRegression()
+	model.fit(x, y)
+	print('This is working')
+	print("Sklearn m:", model.coef_[0])
+	print("Sklearn b:", model.intercept_)
+
 
 
 	#plotting 
@@ -98,15 +109,6 @@ def run():
 
 	plt.show()
 	return coordinates, line_history
-	# #To make sure our work is correct we are going to compare the results using scikit-learn
-	# x = coordinates[:, 0].reshape(-1, 1)
-	# y = coordinates[:, 1]
-
-	# model = LinearRegression()
-	# model.fit(x, y)
-
-	# print("Sklearn m:", model.coef_[0])
-	# print("Sklearn b:", model.intercept_)
 
 
 
