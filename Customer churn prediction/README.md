@@ -134,11 +134,10 @@ prediction = "Churn Risk" if churn_probability > 0.15 else "Safe"
 
 ## 🚀 How to Run
 
-1. **Clone the repository**
-   ```bash
- [  git clone <(https://github.com/TamahiAlmutassim/Python-Projects/tree/main/Customer%20churn%20prediction)>
-   cd customer-churn-prediction]
-   ```
+
+```bash
+git clone https://github.com/TamahiAlmutassim/Python-Projects.git
+```
 
 2. **Install dependencies**
    ```bash
